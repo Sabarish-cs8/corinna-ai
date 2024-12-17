@@ -1,3 +1,4 @@
+import { AuthContextProvider } from '@/context/use-auth-context'
 import React from 'react'
 
 type Props = {
@@ -5,9 +6,13 @@ type Props = {
 }
 
 const SignUpFormProvider = ({children}: Props) => {
-  return (
-    <div>SignUpFormProvider</div>
-  )
+  //return (
+ //  <AuthContextProvider>
+ //   {/*<FormProvider>
+ //       
+  //  </FormProvider>*/}
+ //  </AuthContextProvider>
+  //)
 }
 
 export default SignUpFormProvider
