@@ -1,4 +1,5 @@
-import React , {SetStateAction, useState} from 'react'
+'use client'
+import React , {useState} from 'react'
 
 type InitialValuesProps = {
     currentStep:number

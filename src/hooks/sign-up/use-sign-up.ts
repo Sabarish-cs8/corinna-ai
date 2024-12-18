@@ -1,3 +1,4 @@
+'use client'
 import { useToast } from "@/components/ui/use-toast"
 import { UserRegistrationProps, UserRegistrationSchema } from "@/schemas/auth.schema"
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -37,7 +38,7 @@ export const useSignUpForm = () =>{
         } catch (error:any) {
             toast({
                 title:'Error',
-                description:error.errors.[0].longMessage,
+                description:error.errors[0].longMessage,
             })
             
         }
@@ -91,4 +92,5 @@ export const useSignUpForm = () =>{
         onHandleSubmit,
         onGenerateOTP,
         loading,
+    }
 }
