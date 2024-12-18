@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { onCompleteUserRegistration } from "@/actions/auth"
+import { SignUpResource } from '@clerk/types';
 
 export const useSignUpForm = () =>{
     const { toast } = useToast()
@@ -25,8 +26,21 @@ export const useSignUpForm = () =>{
         password:string,
         onNext:React.Dispatch<React.SetStateAction<number>>
     ) => {
-        if(!isLoaded) return
+        if(!isLoaded) {
+            toast({
+                title: 'Error',
+                description: 'Clerk is not loaded. Please try again later.',
+              });
+              return
+        }
         try {
+                // Validate email and password
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        throw new Error('Invalid email address');
+      }
+      if (!password || password.length < 8) {
+        throw new Error('Password must be at least 8 characters long');
+      }
             await signUp.create({
                 emailAddress:email,
                 password:password,
@@ -34,14 +48,15 @@ export const useSignUpForm = () =>{
             await signUp.prepareEmailAddressVerification({strategy:'email_code'})
     
             onNext((prev)=>prev + 1)
-            alert("running")
+            alert('OTP generation process started');
             
         } catch (error:any) {
+            const clerkError = error?.errors?.[0]?.longMessage || 'Something went wrong. Please try again.';
             toast({
                 title:'Error',
-                description:error.errors[0].longMessage,
+                description:clerkError,
             })
-            
+            console.error('Error in onGenerateOTP:', error);
         }
     }
     const onHandleSubmit = methods.handleSubmit(
@@ -80,10 +95,10 @@ export const useSignUpForm = () =>{
                         })
                     }
                  }
-            } catch (error) {
+            } catch (error:any) {
                 toast({
                     title:'Error',
-                    description:error.errors[0].longMessage
+                    description:error.errors[0].longMessage,
                 })
             }
         }
