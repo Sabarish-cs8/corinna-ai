@@ -36,6 +36,10 @@ const RegistrationFormStep = (props: Props) => {
                 />
             )
         case 2:
+            return(
+            <DetailForm errors={errors} register={register} />
+        
+        )
         case 3:
     }
   return (
