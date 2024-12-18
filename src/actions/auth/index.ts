@@ -27,6 +27,7 @@ export const onCompleteUserRegistration =  async (
             return {status:200 , user: registered};
         }
     } catch (error) {
+        console.log("Error from here",error)
         return {status:400}       
     }
 }
