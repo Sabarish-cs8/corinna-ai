@@ -31,3 +31,7 @@ export const onCompleteUserRegistration =  async (
         return {status:400}       
     }
 }
+
+export const onLoginUser = async () => {
+    
+}
