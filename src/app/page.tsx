@@ -7,8 +7,18 @@ import clsx from 'clsx'
 import { Check } from "lucide-react";
 import Link from "next/link";
 
-export default function Home(){
+export default async function Home(){
   //WIP:Challenge to setup billing card
+
+  const posts: 
+  | {
+    id: string 
+    title: string 
+    image: string 
+    content: string
+    createdAt: Date
+  }[]
+  | undefined = await onGetBlogPosts()
 return (
   <main>
     <NavBar />
