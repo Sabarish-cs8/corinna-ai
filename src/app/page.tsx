@@ -6,6 +6,7 @@ import Image from "next/image";
 import clsx from 'clsx'
 import { Check } from "lucide-react";
 import Link from "next/link";
+import { onGetBlogPosts } from "@/actions/landing";
 
 export default async function Home(){
   //WIP:Challenge to setup billing card
@@ -95,8 +96,25 @@ return (
           
         </Card>
       ))}
-
     </div>
+    <section className="lg:grid-cols-3 grid-cols-1 grid gap-5 container">
+      {posts && posts.map((post)=>(
+        <Link 
+          href={`/blogs/${post.id}`}
+          key={post.id}
+          >
+            <Card className="flex flex-col gap-2 rounded-xl overflow-hidden h-full hover:bg-gray-100">
+              <div className="relative w-full aspect-video">
+                <Image src={`${process.env.CLOUDWAYS_UPLOADS_URL}${post.image}`}
+                alt="post featured image"
+                fill
+                />
+
+              </div>
+            </Card>
+          </Link>
+      ))}
+    </section>
   </main>
 )
 }
