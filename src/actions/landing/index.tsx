@@ -43,4 +43,4 @@ export const onGetBlogPosts = async () => {
     }catch(error){
         console.log(error)
     }
-}
+}  

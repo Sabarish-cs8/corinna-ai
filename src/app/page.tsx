@@ -4,9 +4,11 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { pricingCards } from "@/constants/landing-page";
 import Image from "next/image";
 import clsx from 'clsx'
-import { Check } from "lucide-react";
+import {ArrowRightCircleIcon, Check } from "lucide-react";
 import Link from "next/link";
 import { onGetBlogPosts } from "@/actions/landing";
+import parse from "html-react-parser";
+import { getMonthName } from "@/lib/utils";
 
 export default async function Home(){
   //WIP:Challenge to setup billing card
@@ -93,11 +95,18 @@ return (
               Get Started
             </Link>
           </CardFooter>
-          
         </Card>
       ))}
     </div>
-    <section className="lg:grid-cols-3 grid-cols-1 grid gap-5 container">
+    <section className="flex justify-center items-center flex-col gap-4 mt-28">
+      <h2 className="text-4xl text-center">
+        News Room
+      </h2>
+      <p className="text-muted-foreground text-center max-w-lg">
+        Explore our insights on AI, technology, and optimizing your business.
+      </p>
+    </section>
+    <section className="md:grid-cols-3 grid-cols-1 grid gap-5 container">
       {posts && posts.map((post)=>(
         <Link 
           href={`/blogs/${post.id}`}
@@ -110,6 +119,14 @@ return (
                 fill
                 />
 
+              </div>
+              <div className="py-5 px-10 flex flex-col gap-5">
+                <CardDescription>
+                  {getMonthName(post.createdAt.getMonth())}{' '}
+                  {post.createdAt.getDate()} {post.createdAt.getFullYear()}
+                </CardDescription>
+                <CardTitle>{post.title}</CardTitle>
+                {parse(post.content.slice(4, 100))}...
               </div>
             </Card>
           </Link>
