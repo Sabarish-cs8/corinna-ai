@@ -1,4 +1,5 @@
 'use client'
+import useSidebar from '@/context/use-sidebar'
 import React from 'react'
 
 type Props = {
