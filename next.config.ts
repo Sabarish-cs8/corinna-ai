@@ -6,6 +6,10 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
+        protocol:'https',
+        hostname:'ucarecdn.com',
+      },
+      {
         protocol: 'https',
         hostname: 'wordpress-1385811-5129701.cloudwaysapps.com',
       },
