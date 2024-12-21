@@ -81,27 +81,27 @@ export const onIntegrateDomain = async (domain:string,icon:string)=> {
 
 export const onGetSubscriptionPlan = async () => {
     try {
-        const user = await currentUser()
-        if(!user) return
-        const plan = await client.user.findUnique({
-            where:{
-                clerkId:user.id
+      const user = await currentUser()
+      if (!user) return
+      const plan = await client.user.findUnique({
+        where: {
+          clerkId: user.id,
+        },
+        select: {
+          subscription: {
+            select: {
+              plan: true,
             },
-            select:{
-                subscription:{
-                    select:{
-                        plan:true,
-                    }
-                }
-            }
-        })
-        if(plan){
-            return plan.subscription?.plan
-        }
+          },
+        },
+      })
+      if (plan) {
+        return plan.subscription?.plan
+      }
     } catch (error) {
-      console.log(error)        
+      console.log(error)
     }
-}
+  }
 
 export const onGetAllAccountDomains = async () => {
     const user = await currentUser()
