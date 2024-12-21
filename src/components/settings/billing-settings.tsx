@@ -12,8 +12,8 @@ const BillingSettings = async (props: Props) => {
     const planFeatures = pricingCards.find(
       (card) => card.title.toUpperCase() === plan?.toUpperCase()
     )?.features
-    if(!planFeatures) return 
 
+    if(!planFeatures) return 
     console.log(planFeatures)
   return (
     <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
