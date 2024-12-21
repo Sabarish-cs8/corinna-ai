@@ -103,7 +103,7 @@ return (
         News Room
       </h2>
       <p className="text-muted-foreground text-center max-w-lg">
-        Explore our insights on AI, technology, and optimizing your business.
+        Explore our insights on AI, technology, and optimizing your business. 
       </p>
     </section>
     <section className="md:grid-cols-3 grid-cols-1 grid gap-5 container">
