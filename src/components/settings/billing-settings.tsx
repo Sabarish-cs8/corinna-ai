@@ -9,6 +9,7 @@ type Props = {}
 
 const BillingSettings = async (props: Props) => {
     const plan = await onGetSubscriptionPlan()
+    console.log(plan)
     const planFeatures = pricingCards.find(
       (card) => card.title.toUpperCase() === plan?.toUpperCase()
     )?.features

@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { pricingCards } from "@/constants/landing-page";
 import Image from "next/image";
 import clsx from 'clsx'
-import {ArrowRightCircleIcon, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import Link from "next/link";
 import { onGetBlogPosts } from "@/actions/landing";
 import parse from "html-react-parser";

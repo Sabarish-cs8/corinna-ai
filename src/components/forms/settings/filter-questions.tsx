@@ -6,7 +6,7 @@ import {
   CardDescription,
   CardTitle,
 } from '@/components/ui/card'
-import { useFilterQuestions, useHelpDesk } from '@/hooks/settings/use-settings'
+import { useFilterQuestions } from '@/hooks/settings/use-settings'
 import React from 'react'
 import FormGenerator from '../form-generator'
 import { Button } from '@/components/ui/button'
@@ -46,7 +46,7 @@ const FilterQuestions = ({ id }: Props) => {
           <div className="flex flex-col gap-3">
             <Section
               label="Answer to question"
-              message="The anwer for the question above"
+              message="The answer for the question above"
             />
             <FormGenerator
               inputType="textarea"

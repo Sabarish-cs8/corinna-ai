@@ -1,6 +1,5 @@
-import { useFilterQuestions } from '@/hooks/settings/use-settings';
 import { UploadClient } from '@uploadcare/upload-client';
-import { onChatBotImageUpdate, onCreateHelpDeskQuestion, onDeleteUserDomain, onGetAllHelpDeskQuestions, onUpdateDomain, onUpdatePassword, onUpdateWelcomeMessage } from "@/actions/settings"
+import { onChatBotImageUpdate, onCreateFilterQuestions, onCreateHelpDeskQuestion, onDeleteUserDomain, onGetAllFilterQuestions, onGetAllHelpDeskQuestions, onUpdateDomain, onUpdatePassword, onUpdateWelcomeMessage } from "@/actions/settings"
 import { useToast } from "@/components/ui/use-toast"
 import { ChangePasswordProps, ChangePasswordSchema } from "@/schemas/auth.schema"
 import { DomainSettingsProps, DomainSettingsSchema, FilterQuestionsProps, FilterQuestionsSchema, HelpDeskQuestionsProps, HelpDeskQuestionsSchema } from "@/schemas/settings.schema"
@@ -182,7 +181,7 @@ export const useSettings = (id: string) => {
     }
   }
 
-  export const useFilterQuestions = (id:string) =>{
+export const useFilterQuestions = (id:string) =>{
     const {
       register,
       formState: { errors },
@@ -196,4 +195,39 @@ export const useSettings = (id: string) => {
     const [isQuestions, setIsQuestions] = useState<
       { id: string; question: string; answer: string }[]
     >([])
+     
+    const onAddFilterQuestions = handleSubmit(async (values)=>{
+      setLoading(true)
+      const questions = await onCreateFilterQuestions(id,values.question)
+      if(questions){
+        setIsQuestions(questions.questions!)
+        toast({
+          title:questions.status == 200 ? 'Success' : 'Error',
+          description:questions.message,
+        })
+        reset()
+        setLoading(false)
+      }
+    })
+
+    const onGetQuestions = async () => {
+      setLoading(true)
+      const questions = await onGetAllFilterQuestions(id)
+      if(questions){
+        setIsQuestions(questions.questions)
+        setLoading(false)
+      }
+    } 
+
+    useEffect(()=>{
+      onGetQuestions()
+    },[])
+
+    return {
+      loading,
+      onAddFilterQuestions,
+      register,
+      errors,
+      isQuestions
+    }
   }
