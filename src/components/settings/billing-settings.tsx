@@ -1,9 +1,9 @@
 import { onGetSubscriptionPlan } from '@/actions/settings'
 import React from 'react'
-import { Section } from '../section-label'
-import { pricingCards } from '@/constants/landing-page'
+import Section from '../section-label'
 import { Card, CardContent, CardDescription } from '../ui/card'
 import { CheckCircle2, Plus } from 'lucide-react'
+import { pricingCards } from '@/constants/landing-page'
 
 type Props = {}
 

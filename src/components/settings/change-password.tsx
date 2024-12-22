@@ -1,10 +1,11 @@
 'use client'
 import { useChangePassword } from '@/hooks/settings/use-settings'
 import React from 'react'
-import { Section } from '../section-label'
+
 import { Button } from '../ui/button'
 import { Loader } from '../loader'
 import FormGenerator from '../forms/form-generator'
+import Section from '../section-label'
 
 type Props = {}
 

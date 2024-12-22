@@ -4,7 +4,7 @@ import { ChatProvider } from '@/context/user-chat-context'
 import React from 'react'
 
 type Props = {
-    children : React.ReactNode
+  children: React.ReactNode
 }
 
 const OwnerLayout = async ({ children }: Props) => {

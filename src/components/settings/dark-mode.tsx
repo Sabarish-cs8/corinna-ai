@@ -2,11 +2,12 @@
 
 import { useThemeMode } from '@/hooks/settings/use-settings'
 import React from 'react'
-import { Section } from '../section-label'
+
 import { cn } from '@/lib/utils'
 import { SystemMode } from '../themes-placeholder/systemmode'
 import { LightMode } from '../themes-placeholder/lightmode'
 import { DarkMode } from '../themes-placeholder/darkmode'
+import Section from '../section-label'
 
 type Props = {}
 
