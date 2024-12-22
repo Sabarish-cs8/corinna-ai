@@ -1,5 +1,4 @@
 import { UploadClient } from '@uploadcare/upload-client';
-
 import { onChatBotImageUpdate, onDeleteUserDomain, onUpdateDomain, onUpdatePassword, onUpdateWelcomeMessage } from "@/actions/settings"
 import { useToast } from "@/components/ui/use-toast"
 import { ChangePasswordProps, ChangePasswordSchema } from "@/schemas/auth.schema"
@@ -127,3 +126,5 @@ export const useSettings = (id: string) => {
       deleting,
     }
   }
+
+  
