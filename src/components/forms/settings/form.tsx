@@ -1,6 +1,8 @@
 'use client'
 import { useSettings } from '@/hooks/settings/use-settings'
 import React from 'react'
+import { DomainUpdate } from './domain-update'
+import { Separator } from '@/components/ui/separator'
 
 type Props = {
     id: string
@@ -16,7 +18,20 @@ type Props = {
 const SettingsForm = ({ id, name,chatBot,plan}: Props) => {
     const {register,onUpdateSettings,errors,onDeleteDomain,deleting,loading} = useSettings(id)
   return (
-    <div>SettingsForm</div>
+    <form
+    className="flex flex-col gap-8 pb-10"
+    onSubmit={onUpdateSettings}
+  >
+    <div className="flex flex-col gap-3">
+      <h2 className="font-bold text-2xl">Domain Settings</h2>
+      <Separator orientation="horizontal" />
+      <DomainUpdate
+        name={name}
+        register={register}
+        errors={errors}
+      />
+      </div>
+      </form>
   )
 }
 

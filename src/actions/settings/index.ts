@@ -196,50 +196,6 @@ export const onUpdatePassword = async (password: string) => {
     }
   }
 
-  
-export const onUpdateDomain = async (id: string, name: string) => {
-  try {
-    //check if domain with name exists
-    const domainExists = await client.domain.findFirst({
-      where: {
-        name: {
-          contains: name,
-        },
-      },
-    })
-
-    if (!domainExists) {
-      const domain = await client.domain.update({
-        where: {
-          id,
-        },
-        data: {
-          name,
-        },
-      })
-
-      if (domain) {
-        return {
-          status: 200,
-          message: 'Domain updated',
-        }
-      }
-
-      return {
-        status: 400,
-        message: 'Oops something went wrong!',
-      }
-    }
-
-    return {
-      status: 400,
-      message: 'Domain with this name already exists',
-    }
-  } catch (error) {
-    console.log(error)
-  }
-}
-
 export const onUpdateDomain = async (id: string, name: string) => {
   try {
     //check if domain with name exists

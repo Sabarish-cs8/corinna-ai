@@ -54,6 +54,7 @@ export const onLoginUser = async () => {
                 return {status:200 , user:authenticated,domain:domains?.domains}
             }
          } catch (error) {
+            console.log(error)
             return {status:400}
          }
         }

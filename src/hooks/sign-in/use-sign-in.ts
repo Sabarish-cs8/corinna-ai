@@ -28,7 +28,7 @@ export const useSignInForm = () => {
         })
 
         if (authenticated.status == 'complete') {
-            await setActive({session:authenticated.createdSessionId})
+            await setActive({session: authenticated.createdSessionId })
             toast({
                 title:'Success',
                 description:'Welcome back!',
