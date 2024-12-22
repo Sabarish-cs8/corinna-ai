@@ -1,12 +1,13 @@
+import { useFilterQuestions } from '@/hooks/settings/use-settings';
 import { UploadClient } from '@uploadcare/upload-client';
-import { onChatBotImageUpdate, onDeleteUserDomain, onUpdateDomain, onUpdatePassword, onUpdateWelcomeMessage } from "@/actions/settings"
+import { onChatBotImageUpdate, onCreateHelpDeskQuestion, onDeleteUserDomain, onGetAllHelpDeskQuestions, onUpdateDomain, onUpdatePassword, onUpdateWelcomeMessage } from "@/actions/settings"
 import { useToast } from "@/components/ui/use-toast"
 import { ChangePasswordProps, ChangePasswordSchema } from "@/schemas/auth.schema"
-import { DomainSettingsProps, DomainSettingsSchema } from "@/schemas/settings.schema"
+import { DomainSettingsProps, DomainSettingsSchema, FilterQuestionsProps, FilterQuestionsSchema, HelpDeskQuestionsProps, HelpDeskQuestionsSchema } from "@/schemas/settings.schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTheme } from "next-themes"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 
 const upload = new UploadClient({
@@ -127,4 +128,72 @@ export const useSettings = (id: string) => {
     }
   }
 
+  export const useHelpDesk = (id: string) => {
+    const {
+      register,
+      formState: { errors },
+      handleSubmit,
+      reset,
+    } = useForm<HelpDeskQuestionsProps>({
+      resolver: zodResolver(HelpDeskQuestionsSchema),
+    })
+    const { toast } = useToast()
+    const [loading, setLoading] = useState<boolean>(false)
+    const [isQuestions, setIsQuestions] = useState<
+      { id: string; question: string; answer: string }[]
+    >([])
+    const onSubmitQuestion = handleSubmit(async (values) => {
+      setLoading(true)
+      const question = await onCreateHelpDeskQuestion(
+        id,
+        values.question,
+        values.answer
+      )
+      if (question) {
+        setIsQuestions(question.questions!)
+        toast({
+          title: question.status == 200 ? 'Success' : 'Error',
+          description: question.message,
+        })
+        setLoading(false)
+        reset()
+      }
+    })
   
+    const onGetQuestions = async () => {
+      setLoading(true)
+      const questions = await onGetAllHelpDeskQuestions(id)
+      if (questions) {
+        setIsQuestions(questions.questions)
+        setLoading(false)
+      }
+    }
+  
+    useEffect(() => {
+      onGetQuestions()
+    }, [])
+  
+    return {
+      register,
+      onSubmitQuestion,
+      errors,
+      isQuestions,
+      loading,
+    }
+  }
+
+  export const useFilterQuestions = (id:string) =>{
+    const {
+      register,
+      formState: { errors },
+      handleSubmit,
+      reset,
+    } = useForm<FilterQuestionsProps>({
+      resolver: zodResolver(FilterQuestionsSchema),
+    })
+    const { toast } = useToast()
+    const [loading, setLoading] = useState<boolean>(false)
+    const [isQuestions, setIsQuestions] = useState<
+      { id: string; question: string; answer: string }[]
+    >([])
+  }
