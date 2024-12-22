@@ -82,6 +82,7 @@ export const onIntegrateDomain = async (domain:string,icon:string)=> {
 export const onGetSubscriptionPlan = async () => {
     try {
       const user = await currentUser()
+      console.log("user:",user)
       if (!user) return
       const plan = await client.user.findUnique({
         where: {
