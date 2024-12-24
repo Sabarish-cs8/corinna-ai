@@ -1,10 +1,10 @@
 
-import { onAddCustomersToEmail, onBulkMailer, onCreateMarketingCampaign, onSaveEmailTemplate } from '@/actions/mail'
+import { onAddCustomersToEmail, onBulkMailer, onCreateMarketingCampaign, onGetAllCustomerResponses, onSaveEmailTemplate } from '@/actions/mail'
 import { useToast } from '@/components/ui/use-toast'
 import { EmailMarketingBodySchema, EmailMarketingSchema } from '@/schemas/marketing.schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
-import {  useState } from 'react'
+import {  useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 export const useEmailMarketing = () => {
@@ -138,3 +138,33 @@ export const useEmailMarketing = () => {
         setValue,
       }
     }
+    export const useAnswers = (id: string) => {
+        const [answers, setAnswers] = useState<
+          {
+            customer: {
+              questions: { question: string; answered: string | null }[]
+            }[]
+          }[]
+        >([])
+        const [loading, setLoading] = useState<boolean>(false)
+      
+        const onGetCustomerAnswers = async () => {
+          try {
+            setLoading(true)
+            const answer = await onGetAllCustomerResponses(id)
+            setLoading(false)
+            if (answer) {
+              setAnswers(answer)
+            }
+          } catch (error) {
+            console.log(error)
+          }
+        }
+      
+        useEffect(() => {
+          onGetCustomerAnswers()
+        }, [])
+      
+        return { answers, loading }
+      }
+      
