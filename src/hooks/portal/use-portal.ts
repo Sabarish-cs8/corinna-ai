@@ -59,7 +59,9 @@ import {
   
           setLoading(false)
         }
-      } catch (error) {}
+      } catch (error) {
+        console.log(error)
+      }
     })
   
     const onSelectedTimeSlot = (slot: string) => setSelectedSlot(slot)

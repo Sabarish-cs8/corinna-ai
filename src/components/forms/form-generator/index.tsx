@@ -17,6 +17,7 @@ type Props = {
     errors:FieldErrors<FieldValues>
     lines?:number 
     form?:string 
+    defaultValue?: string
 }
 
 const FormGenerator = ({
@@ -24,6 +25,7 @@ const FormGenerator = ({
     inputType,
     name,
     placeholder,
+    defaultValue,
     register,
     type,
     form,
@@ -45,6 +47,7 @@ const FormGenerator = ({
                         type={type}
                         placeholder={placeholder}
                         form={form}
+                        defaultValue={defaultValue}
                         {...register(name)}
                         />
                         <ErrorMessage 
@@ -97,6 +100,7 @@ const FormGenerator = ({
                     placeholder={placeholder}
                     {...register(name)}
                     rows={lines}
+                    defaultValue={defaultValue}
                     />
                     <ErrorMessage errors={errors}
                     name={name}
