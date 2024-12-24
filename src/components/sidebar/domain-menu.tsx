@@ -46,7 +46,7 @@ const DomainMenu = ({ domains, min }: Props) => {
                         inputType='input'
                         register={register}
                         label="Domain"
-                        name="Domain"
+                        name="domain"
                         errors={errors}
                         placeholder="mydomain.com"
                         type="text"

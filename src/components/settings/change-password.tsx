@@ -1,7 +1,6 @@
 'use client'
 import { useChangePassword } from '@/hooks/settings/use-settings'
 import React from 'react'
-
 import { Button } from '../ui/button'
 import { Loader } from '../loader'
 import FormGenerator from '../forms/form-generator'
@@ -10,7 +9,7 @@ import Section from '../section-label'
 type Props = {}
 
 const ChangePassword = (props: Props) => {
-    const { register,errors,onChangePassword,loading}=useChangePassword
+    const { register,errors,onChangePassword,loading }=useChangePassword()
   return (
     <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
         <div className="lg:col-span-1">
