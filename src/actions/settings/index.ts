@@ -379,7 +379,7 @@ export const onCreateHelpDeskQuestion = async (
       return{
         status:200,
         message:'New help desk question added',
-        question:helpDeskQuestion.helpdesk,
+        questions:helpDeskQuestion.helpdesk,
       }
     }
     return {
