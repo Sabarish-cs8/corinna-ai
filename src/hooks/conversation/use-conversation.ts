@@ -1,6 +1,6 @@
 import { onGetChatMessages, onGetDomainChatRooms, onOwnerSendMessage, onRealTimeChat, onViewUnReadMessages } from "@/actions/conversation";
 import { useChatContext } from "@/context/user-chat-context"
-import { getMonthName } from "@/lib/utils";
+import { getMonthName, pusherClient } from "@/lib/utils";
 import { ChatBotMessageSchema, ConversationSearchSchema } from "@/schemas/conversation.schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useEffect, useRef, useState } from 'react';
@@ -35,7 +35,7 @@ export const useConversation = () => {
                 const rooms = await onGetDomainChatRooms(value.domain)
                 if(rooms){
                     setLoading(false)
-                    setChatRoom(rooms.Customer)
+                    setChatRoom(rooms.customer)
                 }
             } catch (error) {
                 console.log(error)
@@ -127,19 +127,19 @@ export const useChatTime = (createdAt: Date, roomId: string) => {
       onScrollToBottom()
     }, [chats, messageWindowRef])
   
-    useEffect(() => {
-      if (chatRoom) {
-        pusherClient.subscribe(chatRoom)
-        pusherClient.bind('realtime-mode', (data: any) => {
-          setChats((prev) => [...prev, data.chat])
-        })
-  
-        return () => {
-          pusherClient.unbind('realtime-mode')
-          pusherClient.unsubscribe(chatRoom)
-        }
-      }
-    }, [chatRoom])
+//    useEffect(() => {
+//    if (chatRoom) {
+//        pusherClient.subscribe(chatRoom)
+//        pusherClient.bind('realtime-mode', (data: any) => {
+//          setChats((prev) => [...prev, data.chat])
+//        })
+//  
+//        return () => {
+//          pusherClient.unbind('realtime-mode')
+//         pusherClient.unsubscribe(chatRoom)
+//       }
+//     }
+//   }, [chatRoom])
   
     const onHandleSentMessage = handleSubmit(async (values) => {
       try {
