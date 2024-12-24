@@ -104,7 +104,47 @@ export const onGetAllDomainBookings = async (domainId: string) => {
       }
       return {
         status: 200,
-        messege: 'Updated Responses',
+        message: 'Updated Responses',
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  export const onGetAllBookingsForCurrentUser = async (clerkId:string) => {
+    try {
+      const bookings = await client.bookings.findMany({
+        where:{
+          Customer:{
+            Domain:{
+              User:{
+                clerkId,
+              },
+            },
+          },
+        },
+        select:{
+          id:true,
+          slot:true,
+          createdAt:true,
+          date:true,
+          email:true,
+          domainId:true,
+          Customer:{
+            select:{
+              Domain:{
+                select:{
+                  name:true,
+                },
+              },
+            },
+          },
+        },
+      })
+      if(bookings){
+        return{
+          bookings,
+        }
       }
     } catch (error) {
       console.log(error)

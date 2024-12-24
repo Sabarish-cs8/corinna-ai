@@ -57,6 +57,7 @@ type Props = {
     amount,
     stripeId,
   }: Props) => {
+    console.log(questions)
     if (step == 1) {
       return (
         <QuestionsForm
@@ -67,33 +68,33 @@ type Props = {
         />
       )
      }
-   // if (step == 2 && type == 'Appointment') {
-   //     return (
-   //       <BookAppointmentDate
-   //         date={date}
-   //         bookings={bookings}
-   //         currentSlot={slot}
-   //         register={register}
-   //         onBack={onBack}
-   //         onBooking={onBooking}
-   //         onSlot={onSlot}
-   //         loading={loading}
-   //       />
-   //     )
-   //   }
-   // 
-   // 
-   //   if (step == 2 && type == 'Payment') {
-   //     return (
-   //       <PaymentCheckout
-   //         products={products}
-   //         stripeId={stripeId}
-   //         onBack={onBack}
-   //         onNext={onNext}
-   //         amount={amount}
-   //       />
-   //     )
-   //   }
+   if (step == 2 && type == 'Appointment') {
+       return (
+         <BookAppointmentDate
+           date={date}
+           bookings={bookings}
+           currentSlot={slot}
+           register={register}
+           onBack={onBack}
+           onBooking={onBooking}
+           onSlot={onSlot}
+           loading={loading}
+         />
+       )
+     }
+    
+//  WIP: Setup stripe
+//     if (step == 2 && type == 'Payment') {
+//       return (
+//         <PaymentCheckout
+//           products={products}
+//           stripeId={stripeId}
+//           onBack={onBack}
+//           onNext={onNext}
+//           amount={amount}
+//         />
+//       )
+//     }
    
      return (
         <div className="flex flex-col items-center gap-3">
