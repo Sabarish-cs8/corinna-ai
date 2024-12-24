@@ -239,4 +239,21 @@ export const onGetAllCampaigns = async (id: string) => {
       console.log(error)
     }
   }
+  export const onGetEmailTemplate = async (id: string) => {
+    try {
+      const template = await client.campaign.findUnique({
+        where: {
+          id,
+        },
+        select: {
+          template: true,
+        },
+      });
   
+      if (template) {
+        return template.template;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };

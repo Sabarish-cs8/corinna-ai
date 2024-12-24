@@ -1,5 +1,5 @@
 
-import { onAddCustomersToEmail, onBulkMailer, onCreateMarketingCampaign, onGetAllCustomerResponses, onSaveEmailTemplate } from '@/actions/mail'
+import { onAddCustomersToEmail, onBulkMailer, onCreateMarketingCampaign, onGetAllCustomerResponses, onGetEmailTemplate, onSaveEmailTemplate } from '@/actions/mail'
 import { useToast } from '@/components/ui/use-toast'
 import { EmailMarketingBodySchema, EmailMarketingSchema } from '@/schemas/marketing.schema'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -168,3 +168,27 @@ export const useEmailMarketing = () => {
         return { answers, loading }
       }
       
+      
+export const useEditEmail = (id: string) => {
+  const [loading, setLoading] = useState<boolean>(false)
+  const [template, setTemplate] = useState<string>('')
+
+  const onGetTemplate = async (id: string) => {
+    try {
+      setLoading(true)
+      const email = await onGetEmailTemplate(id)
+      if (email) {
+        setTemplate(email)
+      }
+      setLoading(false)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    onGetTemplate(id)
+  }, [])
+
+  return { loading, template }
+}

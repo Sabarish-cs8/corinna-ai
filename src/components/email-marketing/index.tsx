@@ -12,6 +12,7 @@ import CalIcon from '@/icons/cal-icon'
 import PersonIcon from '@/icons/person-icon'
 import Modal from '../modal'
 import { cn, getMonthName } from '@/lib/utils'
+import { EditEmail } from './edit-email'
 
 
 type Props = {
