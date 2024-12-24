@@ -117,3 +117,75 @@ export const onGetDomainChatRooms = async (id: string) => {
   }
   
   
+export const onViewUnReadMessages = async (id: string) => {
+  try {
+    await client.chatMessage.updateMany({
+      where: {
+        chatRoomId: id,
+      },
+      data: {
+        seen: true,
+      },
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const onRealTimeChat = async (
+  chatroomId: string,
+  message: string,
+  id: string,
+  role: 'assistant' | 'user'
+) => {
+  pusherServer.trigger(chatroomId, 'realtime-mode', {
+    chat: {
+      message,
+      id,
+      role,
+    },
+  })
+}
+
+export const onOwnerSendMessage = async (
+  chatroom: string,
+  message: string,
+  role: 'assistant' | 'user'
+) => {
+  try {
+    const chat = await client.chatRoom.update({
+      where: {
+        id: chatroom,
+      },
+      data: {
+        message: {
+          create: {
+            message,
+            role,
+          },
+        },
+      },
+      select: {
+        message: {
+          select: {
+            id: true,
+            role: true,
+            message: true,
+            createdAt: true,
+            seen: true,
+          },
+          orderBy: {
+            createdAt: 'desc',
+          },
+          take: 1,
+        },
+      },
+    })
+
+    if (chat) {
+      return chat
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
