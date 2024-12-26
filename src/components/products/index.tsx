@@ -2,12 +2,14 @@ import React from 'react'
 import TabsMenu from '../tabs/index'
 import { SideSheet } from '../sheet'
 import { Plus } from 'lucide-react'
-import CreateProductForm from './product-form'
+
 import { TabsContent } from '../ui/tabs'
 import { DataTable } from '../table'
 import { TableCell, TableRow } from '../ui/table'
 import Image from 'next/image'
 import { getMonthName } from '@/lib/utils'
+import CreateProductForm from './product-form'
+
 
 type Props = {
     products:{
@@ -22,6 +24,7 @@ type Props = {
 }
 
 const  ProductTable = ({id,products}: Props) => {
+  console.log("products" , products)
   return (
     <div>
     <div>
