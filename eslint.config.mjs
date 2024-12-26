@@ -19,7 +19,15 @@ const eslintConfig = [
     },
   },
   // Add the Next.js specific configuration
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...compat.extends("next/core-web-vitals", "next/typescript",
+    {
+      extends: ['next'],
+      rules: {
+        'react/no-unescaped-entities': 'off',
+        '@next/next/no-page-custom-font': 'off',
+      },
+    }
+  ),
 ];
 
 export default eslintConfig;

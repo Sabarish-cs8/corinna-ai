@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { z } from "zod";
 
 export const MAX_UPLOAD_SIZE = 1024 * 1024 * 2 // 2MB

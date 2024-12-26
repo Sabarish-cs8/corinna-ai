@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { z, ZodType } from "zod";
 import { ACCEPTED_FILE_TYPES, MAX_UPLOAD_SIZE } from "./settings.schema";
 
