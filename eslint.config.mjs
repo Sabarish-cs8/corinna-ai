@@ -10,6 +10,15 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
+  {
+    files: ["**/*.ts", "**/*.tsx"],
+    rules: {
+      "@typescript-eslint/no-empty-object-type": "off",  // Allow empty object types
+      "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],  // Warn for unused vars
+      "@typescript-eslint/no-explicit-any": "off",  // Allow explicit `any` type
+    },
+  },
+  // Add the Next.js specific configuration
   ...compat.extends("next/core-web-vitals", "next/typescript"),
 ];
 

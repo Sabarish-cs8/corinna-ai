@@ -127,19 +127,19 @@ export const useChatTime = (createdAt: Date, roomId: string) => {
       onScrollToBottom()
     }, [chats, messageWindowRef])
   
-//    useEffect(() => {
-//    if (chatRoom) {
-//        pusherClient.subscribe(chatRoom)
-//        pusherClient.bind('realtime-mode', (data: any) => {
-//          setChats((prev) => [...prev, data.chat])
-//        })
-//  
-//        return () => {
-//          pusherClient.unbind('realtime-mode')
-//         pusherClient.unsubscribe(chatRoom)
-//       }
-//     }
-//   }, [chatRoom])
+   useEffect(() => {
+   if (chatRoom) {
+       pusherClient.subscribe(chatRoom)
+       pusherClient.bind('realtime-mode', (data: any) => {
+         setChats((prev) => [...prev, data.chat])
+       })
+ 
+       return () => {
+         pusherClient.unbind('realtime-mode')
+        pusherClient.unsubscribe(chatRoom)
+      }
+    }
+  }, [chatRoom])
   
     const onHandleSentMessage = handleSubmit(async (values) => {
       try {
@@ -149,11 +149,10 @@ export const useChatTime = (createdAt: Date, roomId: string) => {
           values.content,
           'assistant'
         )
-        //WIP: Remove this line
+       
         if (message) {
-          //remove this
-          // setChats((prev) => [...prev, message.message[0]])
-  
+
+         // setChats((prev) => [...prev, message.message[0]])
           await onRealTimeChat(
             chatRoom!,
             message.message[0].message,
