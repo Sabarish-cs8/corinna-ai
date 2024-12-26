@@ -72,3 +72,34 @@ export const onCreateCustomerPaymentIntentSecret = async (
       console.log(error)
     }
   }
+
+  const setPlanAmount = (item: 'STANDARD' | 'PRO' | 'ULTIMATE') => {
+    if (item == 'PRO') {
+      return 1500
+    }
+    if (item == 'ULTIMATE') {
+      return 3500
+    }
+    return 0
+  }
+  
+  export const onGetStripeClientSecret = async (
+    item: 'STANDARD' | 'PRO' | 'ULTIMATE'
+  ) => {
+    try {
+      const amount = setPlanAmount(item)
+      const paymentIntent = await stripe.paymentIntents.create({
+        currency: 'usd',
+        amount: amount,
+        automatic_payment_methods: {
+          enabled: true,
+        },
+      })
+  
+      if (paymentIntent) {
+        return { secret: paymentIntent.client_secret }
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }

@@ -1,4 +1,4 @@
-import { onCreateCustomerPaymentIntentSecret, onUpdateSubscription } from "@/actions/stripe"
+import { onCreateCustomerPaymentIntentSecret, onGetStripeClientSecret, onUpdateSubscription } from "@/actions/stripe"
 import { useToast } from "@/components/ui/use-toast"
 import axios from "axios"
 import { useEffect, useState } from "react"

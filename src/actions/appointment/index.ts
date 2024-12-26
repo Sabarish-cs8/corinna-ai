@@ -1,6 +1,7 @@
 'use server'
 
 import { client } from '@/lib/prisma'
+import { currentUser } from '@clerk/nextjs'
 
 export const onDomainCustomerResponses = async (customerId: string) => {
   try {
@@ -144,6 +145,31 @@ export const onGetAllDomainBookings = async (domainId: string) => {
       if(bookings){
         return{
           bookings,
+        }
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  export const getUserAppointments = async () => {
+    try {
+      const user = await currentUser()
+      if (user) {
+        const bookings = await client.bookings.count({
+          where: {
+            Customer: {
+              Domain: {
+                User: {
+                  clerkId: user.id,
+                },
+              },
+            },
+          },
+        })
+  
+        if (bookings) {
+          return bookings
         }
       }
     } catch (error) {

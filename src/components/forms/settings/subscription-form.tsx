@@ -6,13 +6,14 @@ import { useSubscriptions } from '@/hooks/billing/use-billing'
 import React from 'react'
 import SubscriptionCard from '../../settings/subscription-card'
 import { Button } from '@/components/ui/button'
+import { StripeElements } from '@/components/settings/stripe-elements'
 
 type Props = {
     plan:'STANDARD' | 'PRO' | 'ULTIMATE'
 }
 
 const SubscriptionForm = ({plan}: Props) => {
-    const { loading, onSetPayment, payment, onUpdatetToFreTier } =
+    const { loading, onSetPayment, payment, onUpdateToFreTier } =
     useSubscriptions(plan)
   return (
     <Loader loading={loading}>
@@ -46,7 +47,7 @@ const SubscriptionForm = ({plan}: Props) => {
             </div>
             <StripeElements payment={payment} />
         {payment === 'STANDARD' && (
-          <Button onClick={onUpdatetToFreTier}>
+          <Button onClick={onUpdateToFreTier}>
             <Loader loading={loading}>Confirm</Loader>
           </Button>
         )}
