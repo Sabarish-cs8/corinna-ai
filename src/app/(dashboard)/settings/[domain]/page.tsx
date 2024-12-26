@@ -9,6 +9,7 @@ import React from 'react'
 type Props = {params:{domain:string}}
 
 const DomainSettingsPage =async ({params}: Props) => {
+  console.log(params.domain)
     const domain = await onGetCurrentDomainInfo(params.domain)
     console.log(params)
     if(!domain) redirect('/dashboard')
@@ -23,7 +24,8 @@ const DomainSettingsPage =async ({params}: Props) => {
         name={domain.domains[0].name}
         />
         <BotTrainingForm id={domain.domains[0].id} />
-        <ProductTable id={domain.domains[0].id}  />
+        <ProductTable id={domain.domains[0].id} 
+        products={domain.domains[0].products || [] } />
 
     </div>
     </>
