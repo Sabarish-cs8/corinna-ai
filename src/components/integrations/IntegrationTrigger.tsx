@@ -1,5 +1,5 @@
 import React from 'react'
-import Modal from '../mondal'
+import Modal from '../modal'
 import { CloudIcon } from 'lucide-react'
 import { Card } from '../ui/card'
 import { Separator } from '../ui/separator'

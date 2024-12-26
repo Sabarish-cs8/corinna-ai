@@ -10,7 +10,7 @@ import { Card, CardContent, CardDescription, CardTitle } from '../ui/card'
 import FormGenerator from '../forms/form-generator'
 import CalIcon from '@/icons/cal-icon'
 import PersonIcon from '@/icons/person-icon'
-import Modal from '../mondal'
+import Modal from '../modal'
 import { cn, getMonthName } from '@/lib/utils'
 import { EditEmail } from './edit-email'
 
