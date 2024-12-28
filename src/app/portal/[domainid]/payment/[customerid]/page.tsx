@@ -2,16 +2,17 @@ import { onDomainCustomerResponses } from "@/actions/appointment";
 import { onGetDomainProductsAndConnectedAccountId } from "@/actions/payments";
 import PortalForm from "@/components/forms/portal/portal-form";
 
-const CustomerPaymentPage = async ({
-    params,
-}:{
-    params: {domainid:string; customerid:string}
-}) => {
+const CustomerPaymentPage = async (
+    props:{
+        params: Promise<{domainid:string; customerid:string}>
+    }
+) => {
+    const params = await props.params;
     const questions = await onDomainCustomerResponses(params.customerid)
     const products = await onGetDomainProductsAndConnectedAccountId(
         params.domainid
     )
-    if(!questions) return null 
+    if(!questions) return null
 
     return (
 

@@ -1,9 +1,9 @@
-import React from 'react'
+import React ,{JSX} from 'react'
 
 type Props = {
   title: string
   value: number
-  icon: JSX.Element
+  icon:JSX.Element
   sales?: boolean
 }
 

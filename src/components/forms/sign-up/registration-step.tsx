@@ -9,11 +9,11 @@ import dynamic from 'next/dynamic'
 
 const DetailForm = dynamic(()=> import('./account-details-form'),{
     ssr:false,
-    loading:Spinner,
+    loading: () => <Spinner noPadding />,
 })
 const OTPForm = dynamic(() => import('./otp-form'),{
     ssr:false,
-    loading:Spinner,
+    loading: () => <Spinner noPadding />,
 })
 
 type Props = {}

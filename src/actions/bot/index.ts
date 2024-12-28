@@ -154,7 +154,7 @@ export const onStoreConversations = async (
                         return { response }
                     }
                 }
-                if(checkCustomer && checkCustomer.customer[0].chatRoom.live){
+                if(checkCustomer && checkCustomer.customer[0].chatRoom[0]?.live){
                     await onStoreConversations(
                         checkCustomer?.customer[0].chatRoom[0].id!,
                         message,

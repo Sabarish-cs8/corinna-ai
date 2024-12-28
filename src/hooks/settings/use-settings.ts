@@ -193,7 +193,7 @@ export const useFilterQuestions = (id:string) =>{
     const { toast } = useToast()
     const [loading, setLoading] = useState<boolean>(false)
     const [isQuestions, setIsQuestions] = useState<
-      { id: string; question: string; answer: string }[]
+      { id: string; question: string;}[]
     >([])
      
     const onAddFilterQuestions = handleSubmit(async (values)=>{

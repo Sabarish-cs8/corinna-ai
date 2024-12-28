@@ -35,7 +35,7 @@ export const useConversation = () => {
                 const rooms = await onGetDomainChatRooms(value.domain)
                 if(rooms){
                     setLoading(false)
-                    setChatRoom(rooms.customer)
+                    setChatRooms(rooms.customer)
                 }
             } catch (error) {
                 console.log(error)

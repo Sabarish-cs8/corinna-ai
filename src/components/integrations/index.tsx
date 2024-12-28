@@ -33,7 +33,7 @@ type Props = {
               <IntegrationTrigger
                 connections={connections}
                 title={item.title}
-                descrioption={item.modalDescription}
+                description={item.modalDescription}
                 logo={item.logo}
                 name={item.name}
               />

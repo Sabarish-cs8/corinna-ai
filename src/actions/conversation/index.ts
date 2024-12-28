@@ -42,6 +42,7 @@ export const onGetConversationMode = async (id:string)=> {
             },
         })
         console.log(mode)
+        return mode
     } catch (error) {
         console.log(error)
     }
